@@ -13,4 +13,4 @@ while i < 10:
 x_set = set(x)
 y_set = set(y)
 
-print(x, y, list(x_set | y_set), sep='\n')
+print(x, y, list(x_set & y_set), sep='\n')
