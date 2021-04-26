@@ -14,9 +14,7 @@ prices = {
 
 result = 0
 
-for stock_key, stock_value in stock.items():
-    for prices_key, prices_value in prices.items():
-        if prices_key == stock_key:
-            result += stock_value * prices_value
+for key, value in stock.items():
+    result += value * prices[key]
 
 print(result)
