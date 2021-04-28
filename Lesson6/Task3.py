@@ -1,13 +1,10 @@
-i = tuple(range(1, 11))
-j = tuple([x**2 for x in i])
-v = [i, j]
+v = []
 
 
-list = [[row[i] for row in v] for i in range(len(i))]
+for i in range(1, 11):
+    v.append((i, i**2))
 
-new_list = tuple(list)
 
-print(new_list)
-
+print(v)
 
 
