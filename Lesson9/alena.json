@@ -1,0 +1,25 @@
+{
+  "persons": [
+    {
+      "name": "Alena",
+      "last_name": "Kalashnikova",
+      "phone_number": "380681769845",
+      "city": "Kyiv",
+      "state": "Kyivska"
+    },
+    {
+      "name": "Artem",
+      "last_name": "Kalashnikov",
+      "phone_number": "380681654433",
+      "city": "Chayki",
+      "state": "Kyivska"
+    },
+    {
+      "name": "Anna",
+      "last_name": "Gorodova",
+      "phone_number": "380687777777",
+      "city": "Lviv",
+      "state": "Lvivska"
+    }
+  ]
+}
