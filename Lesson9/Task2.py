@@ -29,7 +29,7 @@ def search_person_name():
         search_file = json.load(f)
 
     for contact in search_file['persons']:
-        if contact['name'] == name.title():
+        if contact['name'] == name:
             print(contact)
             right = True
 
@@ -46,7 +46,7 @@ def search_person_last_name():
         search_file = json.load(f)
 
     for contact in search_file['persons']:
-        if contact['last_name'] == last_name.title():
+        if contact['last_name'] == last_name:
             print(contact)
             right = True
 
@@ -64,7 +64,7 @@ def search_person_full_name():
 
     for contact in search_file['persons']:
         b = contact['name'] + ' ' + contact['last_name']
-        if b == full_name.title():
+        if b == full_name:
             print(contact)
             right = True
 
@@ -81,7 +81,7 @@ def search_person_phone():
         search_file = json.load(f)
 
     for contact in search_file['persons']:
-        if contact['phone_number'] == phone_number.title():
+        if contact['phone_number'] == phone_number:
             print(contact)
             right = True
             break
@@ -92,14 +92,31 @@ def search_person_phone():
         print('Contact not found\n')
 
 
-def search_person_location():
-    city = input('Enter city or state name: ')
+def search_person_city():
+    city = input('Enter city name: ')
     right = False
     with open(a) as f:
         search_file = json.load(f)
 
     for contact in search_file['persons']:
-        if contact['city'] == city.title() or contact['state'] == city.title():
+        if contact['city'] == city:
+            print(contact)
+            right = True
+
+    if right:
+        print('Contact found!\n')
+    else:
+        print('Contact not found\n')
+
+
+def search_person_state():
+    state = input('Enter state name: ')
+    right = False
+    with open(a) as f:
+        search_file = json.load(f)
+
+    for contact in search_file['persons']:
+        if contact['state'] == state:
             print(contact)
             right = True
 
@@ -116,7 +133,7 @@ def del_person():
         search_file = json.load(f)
 
     for contact_id, contact in enumerate(search_file['persons']):
-        if contact['phone_number'] == phone_number.title():
+        if contact['phone_number'] == phone_number:
             del search_file['persons'][contact_id]
             right = True
 
@@ -135,7 +152,7 @@ def upd_person():
         search_file = json.load(f)
 
     for contact in search_file['persons']:
-        if contact['phone_number'] == phone_number.title():
+        if contact['phone_number'] == phone_number:
             print('Commands for changing contact data: ',
                   contact,
                   'What exactly do you want to edit?',
@@ -150,35 +167,35 @@ def upd_person():
 
             if edit_response == '1':
                 name_edit_response = input('Enter new name: ')
-                contact['name'] = name_edit_response.title()
+                contact['name'] = name_edit_response
                 print('Name changed!\n')
 
             if edit_response == '2':
                 last_name_edit_response = input('Enter new last name: ')
-                contact['last_name'] = last_name_edit_response.title()
+                contact['last_name'] = last_name_edit_response
                 print('Last name changed!\n')
 
             if edit_response == '3':
                 phone_number_edit_response = input('Enter new phone number: ')
-                contact['phone_number'] = phone_number_edit_response.title()
+                contact['phone_number'] = phone_number_edit_response
                 print('Phone number changed!\n')
 
             if edit_response == '4':
                 city_edit_response = input('Enter new city: ')
-                contact['city'] = city_edit_response.title()
+                contact['city'] = city_edit_response
                 print('City changed!\n')
 
             if edit_response == '5':
                 state_edit_response = input('Enter new state: ')
-                contact['state'] = state_edit_response.title()
+                contact['state'] = state_edit_response
                 print('State changed!\n')
 
             if edit_response == '6':
-                contact['name'] = input('Enter new name: ').title()
-                contact['last_name'] = input('Enter new last name: ').title()
-                contact['phone_number'] = input('Enter new phone number: ').title()
-                contact['city'] = input('Enter new city: ').title()
-                contact['state'] = input('Enter new state: ').title()
+                contact['name'] = input('Enter new name: ')
+                contact['last_name'] = input('Enter new last name: ')
+                contact['phone_number'] = input('Enter new phone number: ')
+                contact['city'] = input('Enter new city: ')
+                contact['state'] = input('Enter new state: ')
                 print('all contact details have been changed!\n')
 
     with open(a, 'w') as f:
@@ -191,10 +208,11 @@ while True:
           '3. Search by last name',
           '4. Search by full name',
           '5. Search by phone number',
-          '6. Search by city or state',
-          '7. Delete entry for this phone number',
-          '8. Update a record for a given telephone number',
-          '9. Exit the program',
+          '6. Search by city',
+          '7. Search by state',
+          '8. Delete entry for this phone number',
+          '9. Update a record for a given telephone number',
+          '10. Exit the program',
           sep='\n')
 
     i = input('What do you want to do (enter a number): ')
@@ -215,13 +233,16 @@ while True:
         search_person_phone()
 
     elif i == '6':
-        search_person_location()
+        search_person_city()
 
     elif i == '7':
-        del_person()
+        search_person_state()
 
     elif i == '8':
-        upd_person()
+        del_person()
 
     elif i == '9':
+        upd_person()
+
+    elif i == '10':
         break
