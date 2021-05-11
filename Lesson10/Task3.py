@@ -1,89 +1,57 @@
 class TVController:
+    channel = 0
 
-    def __init__(self, channels, i, n, a):
+    def __init__(self, channels):
         self.channels = channels
-        self.i = i
-        self.n = n
-        self.a = a
+        self.count = len(channels)
 
     def first_channel(self):
-        return self.channels[self.i]
+        self.channel = 0
+        return self.channels[0]
 
     def last_channel(self):
-        if self.i == 0:
-            return self.channels[self.i + 2]
+        self.channel = self.count - 1
+        return self.channels[self.channel]
 
-        if self.i == 1:
-            return self.channels[self.i + 1]
-
-        if self.i == 2:
-            return self.channels[self.i]
-
-    def turn_channel(self):
-
-        if self.n == '1':
-            self.i = 0
-            return self.channels[self.i]
-
-        if self.n == '2':
-            self.i = 1
-            return self.channels[self.i]
-
-        if self.n == '3':
-            self.i = 2
-            return self.channels[self.i]
+    def turn_channel(self, channel_number):
+        if 0 < channel_number <= self.count:
+            self.channel = channel_number - 1
+            return self.channels[self.channel]
 
     def next_channel(self):
+        self.channel += 1
 
-        if self.i == 0:
-            self.i = 1
-            return self.channels[self.i]
+        if self.channel > self.count - 1:
+            self.channel = 0
 
-        if self.i == 1:
-            self.i = 2
-            return self.channels[self.i]
-
-        if self.i == 2:
-            self.i = 0
-            return self.channels[self.i - 2]
+        return self.channels[self.channel]
 
     def previous_channel(self):
+        self.channel -= 1
 
-        if self.i == 0:
-            self.i = 2
-            return self.channels[self.i]
+        if self.channel > self.count - 1:
+            self.channel = 0
 
-        if self.i == 1:
-            self.i = 0
-            return self.channels[self.i]
-
-        if self.i == 2:
-            self.i = 1
-            return self.channels[self.i]
+        return self.channels[self.channel]
 
     def current_channel(self):
+        return self.channels[self.channel]
 
-        return self.channels[self.i]
-
-    def is_exist(self):
-        if self.a == '1' or self.a == '2' or self.a == '3' or self.a == 'BBC' or self.a == 'Discovery' or self.a == 'TV1000':
+    def is_exist(self, number):
+        if number in range(self.count) or number in self.channels:
             return 'Yes'
         else:
             return 'No'
 
 
-i = 0
-n = '1'
-a = '4'
-
 channels = ['BBC', 'Discovery', 'TV1000']
 
-controller = TVController(channels, i, n, a)
+controller = TVController(channels)
 
 print(controller.first_channel())
 print(controller.last_channel())
-print(controller.turn_channel())
+print(controller.turn_channel(1))
 print(controller.next_channel())
 print(controller.previous_channel())
 print(controller.current_channel())
-print(controller.is_exist())
+print(controller.is_exist(4))

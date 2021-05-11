@@ -5,7 +5,7 @@ class Dog:
         self.old = a
 
     def human_age(self):
-        print(int(self.old) * int(Dog.age_factor))
+        print(int(self.old) * self.age_factor)
 
 
 old = input('Old: ')
