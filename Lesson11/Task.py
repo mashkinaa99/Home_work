@@ -19,7 +19,7 @@ class Student(Person):
         print(f'({self.name} is a student)')
 
     def tell(self):
-        Person.tell(self)
+        super().tell()
         print(f'Marks: {self.marks}')
 
 
@@ -31,7 +31,7 @@ class Teacher(Person):
         print(f'({self.name} is a teacher)')
 
     def tell(self):
-        Person.tell(self)
+        super().tell()
         print(f'Salary: {self.salary}')
 
 

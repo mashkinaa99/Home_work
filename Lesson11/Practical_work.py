@@ -7,10 +7,10 @@ class Person:
         pass
 
     def __add__(self, other):
-        if other == 'Person':
+        if other == self:
             return 'New person'
 
-        elif other == 'Gumanoid':
+        elif isinstance(other, Gumanoid):
             return 'Predator'
 
 
@@ -23,15 +23,17 @@ class Gumanoid:
         pass
 
     def __add__(self, other):
-        if other == 'Person':
+        if isinstance(other, Person):
             return 'Cry gumanoid'
 
-        elif other == 'Gumanoid':
+        elif other == self:
             return 'Egg gumanoid\'s'
 
 
 x = Gumanoid()
 y = Person()
 
-print(x + 'Person')
-print(y + 'Person')
+print(y + y)
+print(x + x)
+print(x + y)
+print(y + x)
