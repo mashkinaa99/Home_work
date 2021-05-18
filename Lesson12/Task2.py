@@ -10,7 +10,7 @@ class Book:
         return f'{self.name}, {self.year}, {self.author}'
 
     def __repr__(self):
-        return f'{self.name}, {self.year}, {self.author}'
+        return f'Book({self.name}, {self.year}, {self.author})'
 
 
 class Author:
@@ -25,7 +25,7 @@ class Author:
         return f'{self.name}, {self.country}, {self.birthday}'
 
     def __repr__(self):
-        return f'{self.name}, {self.country}, {self.birthday}'
+        return f'Author({self.name}, {self.country}, {self.birthday})'
 
 
 class Library:
@@ -34,32 +34,22 @@ class Library:
     name = 'Feather'
 
     def new_book(self, name: str, year: int, author: Author):
-        book = []
         info_book = Book(name, year, author)
-        book.append(info_book)
-        self.books.append(book)
+        self.books.append(info_book)
         Book.number_of_books += 1
 
     def group_by_author(self, author: Author):
-        i = 0
-        while i < len(self.books):
-            if author == self.books[i][0].author:
-                Author.books.append(self.books[i])
-                i += 1
-            else:
-                i += 1
+        for book in self.books:
+            if author == book.author:
+                Author.books.append(book)
         return Author.books
 
     def group_by_year(self, year: int):
-        group_books = []
-        i = 0
-        while i < len(self.books):
-            if year == self.books[i][0].year:
-                group_books.append(self.books[i])
-                i += 1
-            else:
-                i += 1
-        return group_books
+        book_year = []
+        for book in self.books:
+            if year == book.year:
+                book_year.append(book)
+        return book_year
 
     def __str__(self):
         return self.books
@@ -72,9 +62,12 @@ a = Author('Alena Kalashnikova', 'Kyiv', '12.02.1999')
 a2 = Author('Artem Kalashnikov', 'Kyiv', '27.02.1997')
 
 lib = Library()
-
 lib.new_book('Life outside the computer', 2019, a)
 lib.new_book('Sunny weather', 2021, a)
 lib.new_book('Yorkshire Terrier', 2019, a)
 lib.new_book('Vacation', 2021, a2)
+
+print(repr(lib.books))
+print(repr(lib.group_by_author(a)))
+print(repr(lib.group_by_year(2019)))
 
